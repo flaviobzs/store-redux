@@ -14,3 +14,7 @@ flag -w indica que pode mudar o arquivo
 json-server server.json -p 3333 -w
 
 realizar a formatação antes em uma variavel para evitar retrabalho de chamar a função que formata
+
+yarn add
+redux
+react-redux //integração do redux com o react
