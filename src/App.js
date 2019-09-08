@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'; // irá deixar o store do redux disponivel a todos os componentes
 
+import './config/ReactotronConfig';
+
 import Routes from './routes';
 import GlobalStyles from './styles/global';
 import Header from './components/Header';
