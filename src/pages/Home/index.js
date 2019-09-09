@@ -26,10 +26,10 @@ class Home extends Component {
     });
   }
 
-  handleAddProduct = product => {
-    const { addToCart } = this.props; // todo componete conectado com reduce tem uma propriedade dispach (para disparar uma action para o redux)
+  handleAddProduct = id => {
+    const { addToCartRequest } = this.props; // todo componete conectado com reduce tem uma propriedade dispach (para disparar uma action para o redux)
 
-    addToCart(product);
+    addToCartRequest(id);
   };
 
   render() {
@@ -46,7 +46,7 @@ class Home extends Component {
 
             <button
               type="button"
-              onClick={() => this.handleAddProduct(product)}
+              onClick={() => this.handleAddProduct(product.id)}
             >
               {/* realizar uma action  */}
               <div>

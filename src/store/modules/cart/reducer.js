@@ -4,7 +4,7 @@ export default function cart(state = [], action) {
   // quando é realizado uma action, todo os reduces são chamados, por isso, utililar esse switch para indicar apenar o necessario
 
   switch (action.type) {
-    case '@cart/ADD':
+    case '@cart/ADD_SUCCESS':
       return produce(state, draft => {
         const productIndex = draft.findIndex(p => p.id === action.product.id);
 
