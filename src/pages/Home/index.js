@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { MdAddShoppingCart } from 'react-icons/md';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'; // conectar o componete da aplicação com o redux
+import { useSelector, useDispatch } from 'react-redux'; // conectar o componete da aplicação com o redux
 import api from '../../services/api';
 import { formatPrice } from '../../util/format';
 
 import * as CartActions from '../../store/modules/cart/actions';
 import { ProductList } from './styles';
 
-function Home({ amount, addToCartRequest }) {
+export default function Home() {
   const [products, setProducts] = useState([]);
+
+  const amount = useSelector(state =>
+    state.cart.reduce((SumAmount, product) => {
+      SumAmount[product.id] = product.amount;
+      return SumAmount;
+    }, {})
+  );
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function loadProducts() {
@@ -25,7 +33,7 @@ function Home({ amount, addToCartRequest }) {
   }, []);
 
   function handleAddProduct(id) {
-    addToCartRequest(id);
+    dispatch(CartActions.addToCartRequest(id));
   }
 
   return (
@@ -50,20 +58,3 @@ function Home({ amount, addToCartRequest }) {
     </ProductList>
   );
 }
-
-// verificar a quantidade da cada produto no carrinho e colocar no botao
-const mapStateToProps = state => ({
-  amount: state.cart.reduce((amount, product) => {
-    amount[product.id] = product.amount;
-    return amount;
-  }, {}),
-});
-
-// converter actions em propriedades do componente
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(CartActions, dispatch);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
